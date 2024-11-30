@@ -71,8 +71,6 @@ export default function useForm(inputForm: InputProps[]) {
 
     await sendData(jsonData);
     const result = await pollForData(id);
-    // console.log(result);
-
     setResultData(result);
     
   };
