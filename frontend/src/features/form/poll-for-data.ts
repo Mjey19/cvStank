@@ -4,11 +4,14 @@ import { DataResponse } from "@/shared/types/ResultDataResponse";
 export const pollForData = async (
   id: string,
   retries = 10,
-  delay = 2000
+  delay = 4000
 ): Promise<DataResponse> => {
   try {
-    const response:any = await checkDataReady(id);
+    const response: any = await checkDataReady(id);
     if (response && response.status == 200) {
+      if (typeof response.data === "string") {
+        return JSON.parse(response.data);
+      }
       return response.data;
     }
 
@@ -18,7 +21,7 @@ export const pollForData = async (
       return pollForData(id, retries - 1, delay);
     }
 
-    throw new Error("Data not ready after several attempts");
+    alert("Повторите попытку");
   } catch (error) {
     console.error("Error during polling:", error);
     throw error;

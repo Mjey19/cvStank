@@ -1,20 +1,19 @@
-from flask import Flask, request, jsonify, send_from_directory
+from flask import Flask, request, jsonify
 from flask_cors import CORS
-import json
 import os
-from func import filling_json
+from func import filling_json, new_json
 
 
 app = Flask(__name__)
 #CORS(app)
 CORS(app, origins=["http://localhost:3000", 'http://127.0.0.1:5000'])
-# @app.route('/api/', methods=['GET', 'POST', 'OPTIONS'])
 IMAGES = os.path.join('/static', 'images')
 DATA = os.path.join('/static', 'data')
 app.config['UPLOAD_FOLDER'] = os.path.join(IMAGES, 'input')
 app.config['DOWNLOAD_FOLDER'] = os.path.join(IMAGES, 'output')
 app.config['POST_DATA_FOLDER'] = os.path.join(DATA, 'input')
 app.config['GET_DATA_FOLDER'] = os.path.join(DATA, 'output')
+
 
 @app.route('/')
 def hello_world():
@@ -25,10 +24,8 @@ def hello_world():
 def post_data():
     if request.method == 'OPTIONS':
         return jsonify({'message': 'Data saved successfully'}), 200
-    
     data = request.get_json()
     filling_json(data, app.config['UPLOAD_FOLDER'], app.config['POST_DATA_FOLDER'])
-
     return jsonify({'message': 'Data saved successfully'}), 200
 
 
@@ -49,6 +46,13 @@ def get_image(name):
     filename = os.path.join(app.config['DOWNLOAD_FOLDER'], name)
     return f'<img src="{filename}">'
 
+
+@app.route('/api/yo/<uid>', methods=['POST', 'OPTIONS'])
+def yo(uid):
+    if request.method == 'OPTIONS':
+        return jsonify({'message': 'Data saved successfully'}), 200
+    new_json(uid)
+    return jsonify({'message': 'Yo did successfully'}), 200
 
 
 if __name__ == '__main__':

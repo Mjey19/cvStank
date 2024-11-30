@@ -3,14 +3,18 @@ import React, { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { sendData } from "./send-data";
 import { pollForData } from "./poll-for-data";
-import { DataResponse } from "@/shared/types/ResultDataResponse";
+// import { DataResponse } from "@/shared/types/ResultDataResponse";
 import { encode } from "base64-arraybuffer";
+import { useDispatch } from "react-redux";
+import { resetLoading, updateData } from "../resultBlock/result-slice";
+import { DataResponse } from "@/shared/types/ResultDataResponse";
 interface FormData {
   [key: string]: any;
 }
 export default function useForm(inputForm: InputProps[]) {
+  const dispatch = useDispatch();
   const [formData, setFormData] = useState<FormData>({});
-  const [resultData, setResultData] = useState<DataResponse>();
+  // const [resultData, setResultData] = useState<DataResponse>();
   const handleChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value, files, type } = e.target;
     let dataValue: string | number | File | null;
@@ -49,6 +53,7 @@ export default function useForm(inputForm: InputProps[]) {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const data = new FormData();
+    dispatch(resetLoading());
 
     inputForm.forEach((item) => {
       if (formData[item.inputName]) {
@@ -68,12 +73,16 @@ export default function useForm(inputForm: InputProps[]) {
     const object: { [key: string]: any } = {};
     data.forEach((value, key) => (object[key] = value));
     const jsonData = JSON.stringify(object);
-
     await sendData(jsonData);
     const result = await pollForData(id);
-    setResultData(result);
-    
+    // setResultData(result);
+    const resultWithLoading: DataResponse = {
+      ...result,
+      isLoading: false,
+    };
+
+    dispatch(updateData(resultWithLoading));
   };
 
-  return { handleChange, handleSubmit, resultData };
+  return { handleChange, handleSubmit };
 }
