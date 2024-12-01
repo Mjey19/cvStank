@@ -189,8 +189,8 @@ def cv1(uid):
     
     dct = {
     "area": round(aream,2), 
-    "consumption": round(float(data1['consumption'])*aream*float(data1['slice']),2), 
-    "time": round(aream*float(data1['complexity'])*float(data1['slice']),2), 
+    "consumption": round(aream*float(data1['slice'])/float(data1['consumption']),2), 
+    "time": round(aream*float(data1['slice'])/float(data1['complexity']),2), 
     "money": round(aream*float(data1['slice'])*float(data1['timePrice'])/float(data1['complexity']))
     }
     

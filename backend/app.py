@@ -27,7 +27,7 @@ def post_data():
     data = request.get_json()
     filling_json(data, app.config['UPLOAD_FOLDER'], app.config['POST_DATA_FOLDER'])
     #generate(data,app.config['GET_DATA_FOLDER'][1:],app.config['DOWNLOAD_FOLDER'][1:])
-    data['detail'] = 'back door'
+    #data['detail'] = 'back door'
     cv1(data['uid'])
     return jsonify({'message': 'Data saved successfully'}), 200
 

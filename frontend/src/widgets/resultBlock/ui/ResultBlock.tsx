@@ -29,10 +29,10 @@ export function ResultBlock() {
               Расход ЛКМ: <b>{resultData.consumption} м2</b>
             </li>
             <li>
-              Время на окраску элемента: <b>{resultData.time} м2</b>
+              Время на окраску элемента: <b>{resultData.time} часа</b>
             </li>
             <li>
-              Расход на покраску:<b>{resultData.money} м2</b>
+              Расход на покраску:<b>{resultData.money} руб</b>
             </li>
           </ul>
         </div>

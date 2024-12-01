@@ -24,13 +24,14 @@ export const resultSlice = createSlice({
   reducers: {
     resetData: () => initialState,
     updateData: (state, action: PayloadAction<DataResponse>) => {
-      const { area, consumption, imageUrl, time, isLoading } = action.payload;
+      const { area, consumption, imageUrl, time, isLoading, money } =
+        action.payload;
 
       state.area = area;
       state.consumption = consumption;
       state.imageUrl = imageUrl;
       state.time = time;
-
+      state.money = money;
       state.isLoading = isLoading;
     },
   },

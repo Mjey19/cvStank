@@ -107,6 +107,7 @@ export function Form() {
                 </div>
                 <Input
                   min={0}
+                  step = {0.01}
                   required={item.mandatory}
                   className={classes.input}
                   type={item.inputType}
