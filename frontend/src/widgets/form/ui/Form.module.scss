@@ -39,8 +39,16 @@
         &::placeholder {
           color: rgba(27, 106, 180, 0.7);
         }
+        &[type=file] {
+          padding-top: 7px;
+        }
       }
     }
+  }
+  .formPar{
+    margin-top: 12px;
+    color: rgb(167, 0, 0);
+    font-size: 14px;
   }
   .button {
     background: rgb(27, 106, 180);

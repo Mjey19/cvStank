@@ -5,7 +5,6 @@ import Input from "@/shared/ui/input";
 import Button from "@/shared/ui/button";
 import useForm from "@/features/form/use-form";
 
-
 const inputForm = [
   {
     labelName: "Стоимость 1л ЛКМ",
@@ -90,27 +89,30 @@ export function Form() {
 
   return (
     <form onSubmit={handleSubmit} className={classes.form}>
-      <div className={classes.formInner}>
-        {inputForm.map((item, index) => {
-          return (
-            <Label key={index} className={classes.inputBlock} id="">
-              <div className={classes.labelTitle}>
-                {item.labelName}
-                {item.mandatory && <div style={{ color: "red" }}>*</div>}
-              </div>
-              <Input
-                min={0}
-                required={item.mandatory}
-                className={classes.input}
-                type={item.inputType}
-                name={item.inputName}
-                placeholder={item.placeholder}
-                onChange={handleChange}
-                {...(item.inputType === "file" && { accept: "image/*" })}
-              />
-            </Label>
-          );
-        })}
+      <div>
+        <div className={classes.formInner}>
+          {inputForm.map((item, index) => {
+            return (
+              <Label key={index} className={classes.inputBlock} id="">
+                <div className={classes.labelTitle}>
+                  {item.labelName}
+                  {item.mandatory && <div style={{ color: "red" }}>*</div>}
+                </div>
+                <Input
+                  min={0}
+                  required={item.mandatory}
+                  className={classes.input}
+                  type={item.inputType}
+                  name={item.inputName}
+                  placeholder={item.placeholder}
+                  onChange={handleChange}
+                  {...(item.inputType === "file" && { accept: "image/*" })}
+                />
+              </Label>
+            );
+          })}
+        </div>
+        <p className={classes.formPar}>* – обязательные для заполнения поля</p>
       </div>
       <Button
         onClick={() => handleSubmit}
