@@ -3,7 +3,7 @@ import { DataResponse } from "@/shared/types/ResultDataResponse";
 
 export const pollForData = async (
   id: string,
-  retries = 10,
+  retries = 15,
   delay = 4000
 ): Promise<DataResponse> => {
   try {

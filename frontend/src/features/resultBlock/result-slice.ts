@@ -22,7 +22,7 @@ export const resultSlice = createSlice({
   name: "resultData",
   initialState,
   reducers: {
-    resetLoading: () => initialState,
+    resetData: () => initialState,
     updateData: (state, action: PayloadAction<DataResponse>) => {
       const { area, consumption, imageUrl, time, isLoading } = action.payload;
 
@@ -36,6 +36,6 @@ export const resultSlice = createSlice({
   },
 });
 
-export const { updateData, resetLoading } = resultSlice.actions;
+export const { updateData, resetData } = resultSlice.actions;
 
 export default resultSlice.reducer;

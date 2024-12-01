@@ -1,4 +1,3 @@
-
 import InputProps from "@/shared/types/InputProps";
 import React, { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
@@ -7,7 +6,7 @@ import { pollForData } from "./poll-for-data";
 // import { DataResponse } from "@/shared/types/ResultDataResponse";
 import { encode } from "base64-arraybuffer";
 import { useDispatch } from "react-redux";
-import { resetLoading, updateData } from "../resultBlock/result-slice";
+import { resetData, updateData } from "../resultBlock/result-slice";
 import { DataResponse } from "@/shared/types/ResultDataResponse";
 interface FormData {
   [key: string]: any;
@@ -40,11 +39,10 @@ export default function useForm(inputForm: InputProps[]) {
     }
   };
 
-
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const data = new FormData();
-    dispatch(resetLoading());
+    dispatch(resetData());
 
     inputForm.forEach((item) => {
       if (formData[item.inputName]) {
@@ -52,11 +50,10 @@ export default function useForm(inputForm: InputProps[]) {
       }
     });
 
-    
     const uid = uuidv4();
     data.append("uid", uid);
     data.append("photo_name", uid + formData.photoName);
-    const id:any = uid;
+    const id: any = uid;
 
     const object: { [key: string]: any } = {};
     data.forEach((value, key) => (object[key] = value));

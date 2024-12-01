@@ -75,5 +75,5 @@ def del_image():
     delete_files_in_folder("static/images/output")
 
 
-
+del_image()
 # 6a24e6b5-d1f3-43a7-a490-8d17388a77f0
