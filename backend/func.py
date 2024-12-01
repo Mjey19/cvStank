@@ -31,17 +31,7 @@ def filling_json(data, pathImg, pathJson):
     save_img(data['photo'], pathImg, data['photo_name'])
 
 
-# \/ \/ \/ \/ \/ \/ \/
-# STUPID FAKE CODE HERE
-# \/ \/ \/ \/ \/ \/ \/
-def func_egor():
-    fake = {
-        "area": 1,
-        "consumption": 2,
-        "time": 3,
-        "money": 52
-    }
-    return fake
+
 
 
 def copyImg(name):
@@ -50,12 +40,6 @@ def copyImg(name):
     shutil.copy2(f'static/images/input/{name}.jpg', out_path)
     return f'{base_url}/{out_path}'
 
-
-
-def new_json(uid, dict = func_egor()):
-    dict["imageUrl"] = copyImg(uid)
-    with open(f'static/data/output/{uid}.json', "w") as file:
-        json.dump(dict, file)
 
  
 def delete_files_in_folder(folder_path):

@@ -83,6 +83,13 @@ const inputForm = [
     inputName: "flareDeparture",
     mandatory: false,
   },
+  {
+    labelName: "Дверь ",
+    inputType: "string",
+    placeholder: "Введите значение",
+    inputName: "detail",
+    mandatory: false,
+  },
 ];
 export function Form() {
   const { handleChange, handleSubmit } = useForm(inputForm);

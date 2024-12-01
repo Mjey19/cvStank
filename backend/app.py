@@ -1,8 +1,8 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 import os
-from func import filling_json, new_json
-
+from func import filling_json
+from cv1 import cv1
 
 app = Flask(__name__)
 #CORS(app)
@@ -26,6 +26,9 @@ def post_data():
         return jsonify({'message': 'Data saved successfully'}), 200
     data = request.get_json()
     filling_json(data, app.config['UPLOAD_FOLDER'], app.config['POST_DATA_FOLDER'])
+    #generate(data,app.config['GET_DATA_FOLDER'][1:],app.config['DOWNLOAD_FOLDER'][1:])
+    data['detail'] = 'back door'
+    cv1(data['uid'])
     return jsonify({'message': 'Data saved successfully'}), 200
 
 
@@ -45,15 +48,6 @@ def get_data(UID):
 def get_image(name):
     filename = os.path.join(app.config['DOWNLOAD_FOLDER'], name)
     return f'<img src="{filename}">'
-
-
-@app.route('/api/yo/<uid>', methods=['POST', 'OPTIONS'])
-def yo(uid):
-    if request.method == 'OPTIONS':
-        return jsonify({'message': 'Data saved successfully'}), 200
-    new_json(uid)
-    return jsonify({'message': 'Yo did successfully'}), 200
-
 
 if __name__ == '__main__':
     app.run(debug=True, port='5000')
