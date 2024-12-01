@@ -188,10 +188,10 @@ def cv1(uid):
     number_update()
     
     dct = {
-    "area": aream, 
-    "consumption": float(data1['consumption'])*aream*float(data1['slice']), 
-    "time": aream*float(data1['complexity'])*float(data1['slice']), 
-    "money": aream*float(data1['slice'])*float(data1['timePrice'])/float(data1['complexity'])
+    "area": round(aream,2), 
+    "consumption": round(float(data1['consumption'])*aream*float(data1['slice']),2), 
+    "time": round(aream*float(data1['complexity'])*float(data1['slice']),2), 
+    "money": round(aream*float(data1['slice'])*float(data1['timePrice'])/float(data1['complexity']))
     }
     
     dct["imageUrl"] = f"http://127.0.0.1:5000/static/images/output/{uid}.jpg"
