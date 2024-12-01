@@ -71,8 +71,8 @@ def delete_files_in_folder(folder_path):
 def del_image():
     delete_files_in_folder("static/data/input")
     delete_files_in_folder("static/data/output")
-    delete_files_in_folder("static/data/input")
-    delete_files_in_folder("static/data/output")
+    delete_files_in_folder("static/images/input")
+    delete_files_in_folder("static/images/output")
 
 
 
